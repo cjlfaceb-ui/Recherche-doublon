@@ -99,18 +99,17 @@ class Application(tk.Tk):
         paned.add(groups_wrap, weight=1)
 
         self.groups_tree = ttk.Treeview(
-            groups_wrap, columns=("nb", "taille", "gaspille"),
+            groups_wrap, columns=("nb", "nom", "taille", "gaspille"),
             show="headings", selectmode="browse", height=8,
         )
         for col, text, w, anchor in (
             ("nb", "N°", 50, "center"),
+            ("nom", "Fichier", 380, "w"),
             ("taille", "Taille du fichier", 110, "e"),
             ("gaspille", "Espace en double", 130, "e"),
-            ("nom", "Fichier", 380, "w"),
         ):
             self.groups_tree.heading(col, text=text)
             self.groups_tree.column(col, width=w, anchor=anchor)
-        self.groups_tree["displaycolumns"] = ("nb", "nom", "taille", "gaspille")
         vsb = ttk.Scrollbar(groups_wrap, orient="vertical", command=self.groups_tree.yview)
         self.groups_tree.configure(yscrollcommand=vsb.set)
         self.groups_tree.pack(side="left", fill="both", expand=True)
